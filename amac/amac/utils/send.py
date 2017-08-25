@@ -39,7 +39,7 @@ def send_key(key1, key2):
 	red = QueueRedis()
 
 	if fundIds and managerIdSet:
-		for fundId, managerId in (fundIds, managerIdSet):
+		for fundId, managerId in zip(fundIds, managerIdSet):
 			red.send_to_queue(key1, fundId)
 			red.send_to_queue(key2, managerId)
 

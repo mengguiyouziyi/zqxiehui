@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<title>私募基金公示 - 中国证券投资基金业协会</title>
+	<link rel="stylesheet" href="../../common/css/reset.css" type="text/css"/>
+    <link rel="stylesheet" href="../../common/css/unit.css" type="text/css"/>
+    <link rel="stylesheet" href="../../common/css/grid.css" type="text/css"/>
+    <link rel="stylesheet" href="../../common/css/global.css" type="text/css"/>
+    <link rel="stylesheet" href="../../common/css/module.css" type="text/css"/>
+    <link rel="stylesheet" href="../../common/css/respond.css" type="text/css"/>
+    <script type="text/javascript" language="javascript" src="../../lib/jquery/plugins/jquery-ui-1.11.4/external/jquery/jquery.js"></script>
+    <script type="text/javascript" language="javascript" src="../../lib/jquery/plugins/jquery-qrcode/jquery.qrcode.js"></script>
+    <script type="text/javascript" language="javascript" src="../../lib/jquery/plugins/jquery-qrcode/qrcode.js"></script>
+    <script type="text/javascript" language="javascript" src="../../common/js/respond.min.js"></script>
+    
+    
+    <style type="text/css">
+    	.w150 {
+		    width: 150px;
+		}
+		.a1{
+			color: #173bf4;
+		}
+		
+		#qrcode{
+		
+			 width:90px;
+			 height:90px;
+			 margin:0 auto;
+		}
+		#qrcode table tr td{
+			padding:1px;
+			border-bottom:none;
+		}
+		/**
+		#qrcode{
+		 z-index:9999999999;
+		 margin:4px;
+		}
+		
+		#codeico{
+			position:absolute;
+			margin: 34px 34px 34px 34px;
+			z-index:9999999997;
+			width:34px;
+			height:34px;
+			background:url(../../common/images/ico_logo.png) no-repeat;
+		}**/
+    </style>
+    <script type="text/javascript">
+	    function openAMACInfo(){
+	    	$("#tooggleAMACInfo").toggle();
+	    };
+	    $(function() {
+	    	//如果是IE6和7
+	    	if(!+'\v1' && !'1'[0]) {
+	    		$("#qrcode").closest("td").hide();
+	    		$("#IE67").show();
+	    		$("#otherBrowser").hide();
+	    	}else {
+	    		$("#qrcode").qrcode({
+		    		render : "table",
+		    		text : window.location.href,
+		    		width:50,
+		    		height:50
+		    	});
+	    		$("#IE67").hide();
+	    		$("#otherBrowser").show();
+	    	}
+	    	
+	    	if(window.navigator.userAgent.indexOf("Firefox") != -1) {
+	    		$("#close").hide();
+	    	}
+	    	updateClickCount();
+	    });
+	    
+	    function printPage(){
+            //Web.ExecWB(6,1);
+            //window.print();
+        	$("div.g-container").attr("class","g-container1");
+            $("div.g-header").attr("class","g-header1 clearfix");
+            $("#foot1").css("display","none");
+            $("#foot2").css("display","block");
+            $("#comfirmMsg").css("display","none");
+            $("#print1").css("display","none");
+            $("#print2").css("display","block");
+            $("#close").css("display","none");
+            $("#qrcode").css("display","none");
+            
+            getPrintDate();
+            $("#printDateDiv").css("display","block");
+            getPrintUrl();
+            $("#printUrlDiv").css("display","block");
+            
+            var a = "<!DOCTYPE html><html>";
+            var b = $(":root").html();
+            var c = "</html>";
+            var d = b.replace("respond","grid");
+            var win = window.open("","newwindow","resizable=yes,scrollbars=yes,width=1000,height=600");
+            win.document.open();
+            win.document.write(a+d+c);
+            $("#printDateDiv").css("display","none");
+            $("#printUrlDiv").css("display","none");
+            
+            
+            $("div.g-container1").attr("class","g-container");
+            $("div.g-header1").attr("class","g-header clearfix");
+            $("#foot1").css("display","block");
+            $("#foot2").css("display","none");
+            $("#comfirmMsg").css("display","block");
+            $("#print1").css("display","block");
+            $("#print2").css("display","none");
+            $("#close").css("display","block");
+            $("#qrcode").css("display","block");
+            
+            win.document.close();
+        }
+        function printPage1(){
+        	$("#print2").css("display","none");
+        	window.print();
+	    	$("#print2").css("display","block");
+        }
+	    
+	    function closeW(){
+	    	var browserName = navigator.appName;
+	    	if(browserName=="Netscape"){
+	    		window.open('','_self','');
+	    		window.close();
+	    	}
+	    	if(browserName=="Microsoft Internet Explorer"){
+	    		window.opener = null;
+	    		window.open('','_self');
+	    		window.parent.close();
+	    	}
+	    }
+	    
+	  //更新浏览量
+      function updateClickCount() {
+        	$.ajax({
+        		url : "/amac-infodisc/api/hits/pof/fund",
+        		type : "put",
+                contentType: "application/json"
+        	});
+        }
+      function getPrintDate()
+	  {
+		  var now = new Date()
+		  var year = now.getFullYear();
+		  var month = now.getMonth() + 1;
+		  var date = now.getDate();
+		  var str = year + "年" + month + "月" + date + "日";
+		  $("#printDate").text(str);
+	  }
+	  function getPrintUrl()
+	  {
+		  var currentUrl = this.location.href;
+		  $("#printUrl").text(currentUrl);
+	  }
+	    
+	 </script>
+</head>
+
+<body>
+	<div class="g-container">
+        <!-- header start -->
+        <div class="g-header clearfix">
+             <a href="/" class="logo pull-left">
+                    <img class="img-desktop" src="../../common/images/logo.png" alt="中国基金业协会信息公示"/>
+                    <img class="img-responsive" src="../../common/images/logo_mobile.png" alt="中国基金业协会信息公示"/>
+                </a>
+	            <div class="info pull-right">
+			      <span id="IE67" style="display:none;"><span class="fontSpace">组织机构代码</span>：71783348<br/></span>
+			      <span id="otherBrowser"><span class="fontSpace">组织机构代</span>码：71783348<br/></span>
+			                社会团体法人登记证书：社证字第4951号
+	            </div>
+        </div>
+        <!-- header end -->
+
+        <!-- body start -->
+        <div class="g-body">
+            <!-- 私募基金管理人公示 start -->
+            <div class="m-manager-list m-list-details">
+            	<div class="m-top-bar">
+	                <h3 class="text-center font-xbig text-bold mb30">私募基金公示信息</h3>
+	                <p class="mb15"><a href="#" id="comfirmMsg" class="text-danger ml15" id="comfirmMsg"  onclick="openAMACInfo();"><<中国证券投资基金业协会提示>></a></p>
+	                <div style="display:none;" id="tooggleAMACInfo">
+	                	  <p class="mb15" style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;私募基金管理人规模类、提示类公示信息均来源于中国证券投资基金业协会已登记私募基金管理人提供的信息，基金管理人已书面承诺所有填报信息真实、准确、完整，<br/>并承诺承担所有相关法律责任。</p>
+						  <p class="mb15" style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中国证券投资基金业协会对私募基金登记备案信息不做实质性事前审查。公示信息不构成对私募基金管理人投资管理能力、持续合规情况的认可，不作为基金资产安全的保证。</p>
+						  <p class="mb15" style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投资者进行私募基金投资时须谨慎判断和识别风险。</p>
+						  <p class="mb15" style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;社会公众若发现私募基金管理人分类公示信息中存在任何虚假或不实内容，请致电协会投诉电话：<font class="a1">010-66578241</font>，请将相关实名举报或投诉情况发送至邮箱：<a class="a1" style="color: #173bf4;" href="mailto:pf@amac.org.cn">pf@amac.org.cn</a>，<br/>或发送至传真<font class="a1">010-66578256</font>，或邮寄至中国证券投资基金业协会（地址：<font class="a1">北京市西城区金融大街20号交通银行大厦B座9层，邮编100033</font>）。</p>
+						  <p class="mb15" style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列入分类公示的私募基金管理人如对分类公示有异议，请发函至邮箱：<a class="a1" style="color: #173bf4;" href="mailto:pf@amac.org.cn">pf@amac.org.cn</a>。</p>
+						  <br/>
+	                </div>
+	                <div class="hack-wrp" id="print1">
+		            	<input type="button" name="print" onClick="printPage()" class="btn btn-primary btn-print" value="打印"/>
+		            </div>
+		            <div class="hack-wrp" id="print2" style="display: none;">
+		            	<input type="button" onClick="printPage1()" class="btn btn-primary btn-print" value="打印"/>
+		          	</div>
+		          	<div align="right" id="printDateDiv" style="display: none;">打印日期:<span id="printDate"></span></div>
+            		<div align="right" id="printUrlDiv" style="display: none;">打印网址:<span id="printUrl"></span></div>
+                </div>
+                <!-- 数据表格 start -->
+                
+                <table  class="table table-center table-info">
+                	<colgroup>
+                        <col width="20%"/>
+                        <col width="70%"/>
+                        <col width="10%"/>
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                        	<td class="td-title">基金名称:</td>
+                        	<td class="td-content">资舟观复合盘6号私募投资基金</td>
+                        	<td rowspan="3" class="td-code"><div id="qrcode"></div></td>
+                        </tr>
+                        <tr>
+                        	<td class="td-title">基金编号:</td>
+                        	<td class="td-content" >SS3549</td>
+                        </tr>
+                        <tr>
+                        	<td class="td-title">成立时间:</td>
+                        	<td class="td-content">2017-03-09</td>
+                        </tr>
+                        <tr>
+                        	<td class="td-title">备案时间:</td>
+                        	<td class="td-content" colspan="2">2017-03-14</td>
+                        </tr>
+                        <tr>
+                        	<td class="td-title">基金备案阶段:</td>
+                        	<td class="td-content" colspan="2">暂行办法实施后成立的基金</td>
+                        </tr>
+                        <tr>
+                        	<td class="td-title">基金类型:</td>
+                        	<td class="td-content" colspan="2">私募证券投资基金管理人</td>
+                        </tr>
+                        <tr>
+                        	<td class="td-title">币种:</td>
+                        	<td class="td-content" colspan="2">人民币现钞</td>
+                        </tr>
+                        <tr>
+                        	<td class="td-title">基金管理人名称:</td>
+                        	<td class="td-content" colspan="2"><a href="../manager/101000011197.html" target="blank">资舟资产管理（深圳）有限公司</a></td>
+                        </tr>
+                        <tr>
+                        	<td class="td-title">管理类型:</td>
+                        	<td class="td-content" colspan="2">受托管理</td>
+                        </tr>
+                       <!--  <tr>
+                        	<td class="td-title">是否托管:</td>
+                        	<td class="td-content" colspan="2">不适用</td>
+                        </tr> -->
+                        <tr>
+                        	<td class="td-title">托管人名称:</td>
+                        	<td class="td-content" colspan="2">恒泰证券股份有限公司</td>
+                        </tr>
+                        <tr>
+                        	<td class="td-title">主要投资领域:</td>
+                        	<td class="td-content" colspan="2">本基金投资于国内依法发行上市的股票（包括主板、中小板、创业板及其他经中国证监会核准上市的股票）、各类固定收益产品（包括国债、金融债、企业债、公司债、央行票据、中期票据、可转换债券、资产支持证券、中小企业私募债券、债券回购等）、基金、期货、期权、权证、货币市场工具、股份转让系统挂牌公司股票或拟挂牌股权、债权、私募契约型基金、信托计划、证券公司资产管理计划、基金公司资产管理计划、商业银行理财产品、期货公司资产管理计划以及法律法规或中国证监会允许基金投资的其他投资品种。若法律法规允许，本基金可参与港股通交易。本基金可以参与融资融券交易，也可以将其持有的证券作为融券标的出借给证券金融公司。</td>
+                        </tr>
+                        <tr>
+                        	<td class="td-title">运作状态:</td>
+                        	<td class="td-content" colspan="2">正在运作</td>
+                        </tr>
+                        <tr>
+                        	<td class="td-title">基金信息最后更新时间:</td>
+                        	<td class="td-content" colspan="2">2017-06-27</td>
+                        </tr>
+                        <tr>
+                        	<td class="td-title">基金协会特别提示（针对基金）:</td>
+                        	<td class="td-content" colspan="2"></td>
+                        </tr>
+                            <tr>
+                                <td colspan="4" style="padding: 0px 0px;text-align: left;">
+                                    <div style="background-color: #DFDFDF;padding: 8px 10px;font-weight:bold;">信息披露情况</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-title">月报:</td>
+                                <td class="td-content" colspan="2">应披露0条，按时披露0条，未披露0条；</td>
+                            </tr>
+                            <tr>
+                                <td class="td-title">半年报:</td>
+                                <td class="td-content" colspan="2">应披露0条，按时披露0条，未披露0条；</td>
+                            </tr>
+                            <tr>
+                                <td class="td-title">年报:</td>
+                                <td class="td-content" colspan="2">应披露0条，按时披露0条，未披露0条；</td>
+                            </tr>
+                            <tr>
+                                <td class="td-title">季报:</td>
+                                <td class="td-content" colspan="2">应披露1条，按时披露1条，未披露0条；</td>
+                            </tr>
+                    	 
+                     </tbody>
+                </table>
+               
+                <!-- 数据表格 end -->
+                <div class="align-center mt20 hack-wrp" id="close">
+                <!--  <a href="" class="btn btn-primary" onclick="closeW();">关闭</a> -->
+                <!-- 不要改关闭按钮,用button -->
+                 <button onclick="closeW();" style="width:100px;height:30px;">关闭</button>
+                </div>
+                <div class="g-footer1" id="foot2" style="display: none;">版权所有：中国证券投资基金业协会  京ICP备16045718号</div>
+            </div>
+            <!-- 私募基金管理人公示 end -->
+
+        </div>
+        <!-- body end -->
+
+        <!-- footer start -->
+        <div class="g-footer" id="foot1">版权所有：中国证券投资基金业协会  京ICP备16045718号</div>
+        <!-- footer end -->
+    </div>
+</body>
+</html>

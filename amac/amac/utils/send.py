@@ -32,6 +32,8 @@ def send_key(key1, key2):
 			fundIds = [result['fundId'] for result in results]
 			managerIds = [result['managerId'] for result in results]
 			managerIdSet = set(managerIds)
+	except Exception as e:
+		print(e)
 
 	finally:
 		mysql.close()

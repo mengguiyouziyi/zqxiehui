@@ -25,7 +25,7 @@ def send_key(key1, key2):
 	                        charset='utf8', cursorclass=pymysql.cursors.DictCursor)
 	try:
 		with mysql.cursor() as cursor:
-			sql = """select fundId, managerId from amac_fund_copy"""
+			sql = """select fundId, managerId from amac_fund"""
 			print('execute begain')
 			cursor.execute(sql)
 			results = cursor.fetchall()

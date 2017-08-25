@@ -44,6 +44,7 @@ def send_key(key1, key2):
 		for fundId, managerId in zip(fundIds, managerIdSet):
 			red.send_to_queue(key1, fundId)
 			red.send_to_queue(key2, managerId)
+			print(str(fundId) + ' ' + str(managerId))
 
 
 if __name__ == '__main__':

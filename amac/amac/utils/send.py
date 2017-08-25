@@ -40,11 +40,17 @@ def send_key(key1, key2):
 
 	red = QueueRedis()
 
-	if fundIds and managerIdSet:
-		for fundId, managerId in zip(fundIds, managerIdSet):
+	if fundIds:
+		for fundId in fundIds:
 			red.send_to_queue(key1, fundId)
+			print(str(fundId))
+	print()
+	print()
+	print()
+	if managerIdSet:
+		for managerId in managerIdSet:
 			red.send_to_queue(key2, managerId)
-			print(str(fundId) + ' ' + str(managerId))
+			print(str(managerId))
 
 
 if __name__ == '__main__':

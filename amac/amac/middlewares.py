@@ -13,8 +13,8 @@ proxyServer = "http://proxy.abuyun.com:9020"
 
 # 百科的账号
 # 1
-proxyUser = "H256J792G0477J3D"
-proxyPass = "A978AA975C1C8E59"
+proxyUser = "HDJYRWK2113M79ED"
+proxyPass = "0FE38BB4282AFC2B"
 
 # 2
 # proxyUser = "H20X28E37Z5R11UD"

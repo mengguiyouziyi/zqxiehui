@@ -36,22 +36,22 @@ class MysqlPipeline(object):
 		elif isinstance(item, InstItem):
 			"""
 			managerId, integrityInfo, managerNameCh, managerNameEn, registNo, orgInsNo, registDate, manEstablishDate, registAddress, officalAddress, registAmountWan, actualPayAmountWan, commProperty, percent, institutionType, businessType, employNo, institutionURL, isMember, memberType, inTime, legalState, legalPersonName, isWorkRequire, getRequireWay, legalPersonRecord, topManagerCase, beforeFund, laterFund, insInfoUpdate, insSuggestion, crawl_time"""
-			sql = """replace into amac_institution(
+			sql = """replace into amac_institution_copy(
 									managerId, integrityInfo, managerNameCh, managerNameEn, registNo, 
 									orgInsNo, registDate, manEstablishDate, registAddress, officalAddress, 
 									registAmountWan, actualPayAmountWan, commProperty, percent, institutionType, 
 									businessType, employNo, institutionURL, isMember, memberType, 
-									inTime, legalState, legalPersonName, isWorkRequire, getRequireWay, 
+									inTime, legalState, lawOfficeName, lawyerName, legalPersonName, isWorkRequire, getRequireWay, 
 									legalPersonRecord, topManagerCase, beforeFund, laterFund, insInfoUpdate, 
 									insSuggestion, crawlTime
 			 					)
-			 					VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+			 					VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
 			args = (
 				item["managerId"], item["integrityInfo"], item["managerNameCh"], item["managerNameEn"], item["registNo"],
 				item["orgInsNo"], item["registDate"], item["manEstablishDate"], item["registAddress"], item["officalAddress"],
 				item["registAmountWan"], item["actualPayAmountWan"], item["commProperty"], item["percent"], item["institutionType"],
 				item["businessType"], item["employNo"], item["institutionURL"], item["isMember"], item["memberType"],
-				item["inTime"], item["legalState"], item["legalPersonName"], item["isWorkRequire"], item["getRequireWay"],
+				item["inTime"], item["legalState"], item["lawOfficeName"], item["lawyerName"], item["legalPersonName"], item["isWorkRequire"], item["getRequireWay"],
 				item["legalPersonRecord"], item["topManagerCase"], item["beforeFund"], item["laterFund"], item["insInfoUpdate"],
 				item["insSuggestion"], item["crawlTime"]
 			)

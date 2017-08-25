@@ -49,6 +49,8 @@ class InstItem(scrapy.Item):
 	memberType = scrapy.Field()
 	inTime = scrapy.Field()
 	legalState = scrapy.Field()
+	lawOfficeName = scrapy.Field()
+	lawyerName = scrapy.Field()
 	legalPersonName = scrapy.Field()
 	isWorkRequire = scrapy.Field()
 	getRequireWay = scrapy.Field()
